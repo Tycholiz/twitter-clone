@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+	background-color: rebeccapurple;
+	width: 30vw;
+}
+
+.placeholderImage {
+  background-color: red;
+}

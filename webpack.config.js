@@ -4,6 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+import css from 'file.css';
+
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
@@ -29,19 +31,35 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        "presets": ["react", "es2015", "stage-0", "react-hmre"]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          "presets": ["react", "es2015", "stage-0", "react-hmre"]
+        }
+      },
+      {
+        test: /\.json?$/,
+        loader: 'json'
+      },
+      // {
+      //   test: /\.css$/,
+      //   loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+      // },
+      {
+        test: /.css$/,
+        loader: 'style-loader'
+      },
+      {
+        test: /.css$/,
+        loader: 'css-loader',
+        query: {
+          modules: true,
+          localIdentName: '[name][local]_[hash:base64:5]'
+        }
       }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }]
-  }
+    ]
+  },
 };
